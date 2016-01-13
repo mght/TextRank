@@ -156,13 +156,16 @@ def writeFiles(summary, keyphrases, fileName):
 
     print "-"
 
+def main():
+    #retrieve each of the articles
+    articles = os.listdir("articles")
+    for article in articles:
+        print 'Reading articles/' + article
+        articleFile = io.open('articles/' + article, 'r')
+        text = articleFile.read()
+        keyphrases = extractKeyphrases(text)
+        summary = extractSentences(text)
+        writeFiles(summary, keyphrases, article)
 
-#retrieve each of the articles
-articles = os.listdir("articles")
-for article in articles:
-    print 'Reading articles/' + article
-    articleFile = io.open('articles/' + article, 'r')
-    text = articleFile.read()
-    keyphrases = extractKeyphrases(text)
-    summary = extractSentences(text)
-    writeFiles(summary, keyphrases, article)
+if __name__ == '__main__':
+    main()
